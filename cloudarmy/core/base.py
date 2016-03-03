@@ -65,8 +65,8 @@ class BaseTemplate(object):
                 return False
         return True
 
-    def render(self, settings):
-        self.mappings = settings
+    def render(self, mappings):
+        self.mappings = mappings
         self.add_mappings()
 
         valid_attributes = get_class_attrs(self.__class__)

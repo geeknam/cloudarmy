@@ -6,7 +6,7 @@ from setuptools import setup
 
 
 install_requires = [
-    'troposphere',
+    'troposphere', 'pyyaml', 'boto3', 'click'
 ]
 
 print find_packages()

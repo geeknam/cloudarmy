@@ -1,3 +1,4 @@
+
 class TemplateRegistry(object):
 
     def __init__(self):
