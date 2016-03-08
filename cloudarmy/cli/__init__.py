@@ -2,7 +2,7 @@ import boto3
 import os
 import sys
 import yaml
-from urlparse import urlparse, urljoin
+from urlparse import urlparse
 
 from cloudarmy.core import registry
 

@@ -45,9 +45,9 @@ class BaseTemplate(object):
             )
 
     def add_outputs(self):
-        for output_id, ref in self.output.items():
+        for logical_id, keys in self.outputs.items():
             self._template.add_output(
-                Output(output_id, Value=Ref(ref))
+                Output(logical_id, **keys)
             )
 
     def add_resource(self, attr_name):

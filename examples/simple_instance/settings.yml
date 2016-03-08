@@ -1,0 +1,19 @@
+
+OutputDir: /tmp/cf_templates
+
+staging:
+  StackName: test
+  TemplateURL: https://mys3bucket.s3.amazonaws.com/templates/ec2.json
+  DisableRollback: false
+  TimeoutInMinutes: 10
+  Capabilities:
+    - CAPABILITY_IAM
+  Parameters:
+    -
+      ParameterKey: EnvironmentType
+      ParameterValue: staging
+      UsePreviousValue: false
+    -
+      ParameterKey: KeyName
+      ParameterValue: staging-key-pair
+      UsePreviousValue: false

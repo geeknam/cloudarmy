@@ -13,10 +13,7 @@ def main():
 @click.argument('template_dir')
 @click.argument('environment_type')
 def render(**kwargs):
-    ca = CloudArmy(
-        kwargs['template_dir'],
-        kwargs['environment_type']
-    )
+    ca = CloudArmy(**kwargs)
     ca.render()
 
 
@@ -24,10 +21,7 @@ def render(**kwargs):
 @click.argument('template_dir')
 @click.argument('environment_type')
 def upload_s3(**kwargs):
-    ca = CloudArmy(
-        kwargs['template_dir'],
-        kwargs['environment_type']
-    )
+    ca = CloudArmy(**kwargs)
     ca.upload_templates_to_s3()
 
 
@@ -35,10 +29,7 @@ def upload_s3(**kwargs):
 @click.argument('template_dir')
 @click.argument('environment_type')
 def validate(**kwargs):
-    ca = CloudArmy(
-        kwargs['template_dir'],
-        kwargs['environment_type']
-    )
+    ca = CloudArmy(**kwargs)
     pprint.pprint(
         ca.cf.validate_template(
             TemplateURL=ca.settings[ca.environment_type]['TemplateURL']
@@ -50,10 +41,7 @@ def validate(**kwargs):
 @click.argument('template_dir')
 @click.argument('environment_type')
 def cost(**kwargs):
-    ca = CloudArmy(
-        kwargs['template_dir'],
-        kwargs['environment_type']
-    )
+    ca = CloudArmy(**kwargs)
     url = ca.cf.estimate_template_cost(
         TemplateURL=ca.settings[ca.environment_type]['TemplateURL'],
         Parameters=ca.settings[ca.environment_type]['Parameters']
@@ -65,11 +53,7 @@ def cost(**kwargs):
 @click.argument('template_dir')
 @click.argument('environment_type')
 def create_stack(**kwargs):
-
-    ca = CloudArmy(
-        kwargs['template_dir'],
-        kwargs['environment_type']
-    )
+    ca = CloudArmy(**kwargs)
     ca.create_stack(**ca.settings[ca.environment_type])
 
 
