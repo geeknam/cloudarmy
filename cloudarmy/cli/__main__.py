@@ -54,7 +54,17 @@ def cost(**kwargs):
 @click.argument('environment_type')
 def create_stack(**kwargs):
     ca = CloudArmy(**kwargs)
-    ca.create_stack(**ca.settings[ca.environment_type])
+    ca.create_stack()
+
+
+@main.command()
+@click.argument('template_dir')
+@click.argument('environment_type')
+def delete_stack(**kwargs):
+    ca = CloudArmy(**kwargs)
+    ca.cf.delete_stack(
+        StackName=ca.settings[ca.environment_type]['StackName']
+    )
 
 
 if __name__ == '__main__':

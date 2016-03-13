@@ -31,7 +31,11 @@ class CloudArmy(object):
         return yaml.load(yaml_mappings)
 
     def load_mappings(self):
-        return self.load_yaml('mappings.yml')
+        try:
+            return self.load_yaml('mappings.yml')
+        except IOError:
+            print 'No mappings.yml file found'
+            return
 
     def load_settings(self):
         return self.load_yaml('settings.yml')
@@ -94,8 +98,21 @@ class CloudArmy(object):
 
     def create_stack(self):
         self.render()
-        self.upload_templates_to_s3()
+        stack_settings = self.settings[self.environment_type]
+
+        # If no template url, use template cbody refered by the name
+        if 'TemplateURL' not in stack_settings:
+            output_dir = self.settings['OutputDir']
+            output_file = os.path.join(
+                output_dir, '%s.json' % stack_settings.pop('TemplateName')
+            )
+            template_content = open(output_file, 'rb').read()
+            stack_settings['TemplateBody'] = template_content
+        else:
+            self.upload_templates_to_s3()
+
+        print 'Creating stack: %s' % stack_settings['StackName']
         response = self.cf.create_stack(
-            **self.settings[self.environment_type]
+            **stack_settings
         )
         return response

@@ -1,0 +1,10 @@
+
+OutputDir: /tmp/cf_templates
+
+staging:
+  StackName: cloudarmys3
+  TemplateName: s3
+  DisableRollback: false
+  TimeoutInMinutes: 10
+  Capabilities:
+    - CAPABILITY_IAM

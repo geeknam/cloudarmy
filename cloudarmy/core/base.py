@@ -1,7 +1,6 @@
 import inspect
 from troposphere import (
-    Ref, Output,
-    Template, Parameter, BaseAWSObject
+    Output, Template, Parameter, BaseAWSObject
 )
 
 
@@ -66,6 +65,8 @@ class BaseTemplate(object):
         return True
 
     def render(self, mappings):
+        if not mappings:
+            mappings = {}
         self.mappings = mappings
         self.add_mappings()
 
