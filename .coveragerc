@@ -1,0 +1,3 @@
+[report]
+omit =
+    cloudarmy/cli/__main__.py
