@@ -126,7 +126,7 @@ class CloudArmy(object):
         self.render()
         stack_settings = self.settings[self.environment_type]
 
-        # If no template url, use template cbody refered by the name
+        # If no template url, use template body refered by the name
         if 'TemplateURL' not in stack_settings:
             output_dir = self.settings['OutputDir']
             output_file = os.path.join(

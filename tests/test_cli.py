@@ -1,7 +1,9 @@
 import os
+import  json
 import shutil
 import unittest
 import yaml
+from mock import patch, Mock
 from cloudarmy.cli import CloudArmy
 from cloudarmy.core import registry
 from cloudarmy.core.base import BaseTemplate
@@ -38,7 +40,6 @@ class CommandLineTestCase(unittest.TestCase):
                 template_dir=self.tmp_template_dir,
                 environment_type='test'
             )
-        self.assertEqual(registry.templates, [])
 
     def test_load_settings(self):
         settings = {
@@ -95,3 +96,33 @@ class CommandLineTestCase(unittest.TestCase):
             '%sec2.json' % ca.output_dir)
         )
 
+    @patch('boto3.client')
+    @patch('boto3.resource')
+    def test_create_stack(self, mock_resource, mock_client):
+        ca = CloudArmy(
+            template_dir=self.example_project_dir,
+            environment_type='staging'
+        )
+        ca.create_stack()
+        self.assertTrue(
+            mock_client.return_value.create_stack.called
+        )
+
+    @patch('boto3.client')
+    @patch('boto3.resource')
+    def test_create_stack_no_template_url(self, mock_resource, mock_client):
+        ca = CloudArmy(
+            template_dir=self.example_project_dir,
+            environment_type='staging'
+        )
+        # Assume no TemplateURL and TemplateName is provided
+        ca.settings['staging'].pop('TemplateURL')
+        ca.settings['staging']['TemplateName'] = 'ec2'
+        ca.create_stack()
+        # Assert that TemplateBody is a valid json value
+        template = json.loads(
+            mock_client.return_value.create_stack.call_args[1][
+                'TemplateBody'
+            ]
+        )
+        self.assertIsInstance(template, dict)

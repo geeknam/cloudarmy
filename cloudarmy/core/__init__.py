@@ -10,6 +10,9 @@ class TemplateRegistry(object):
             'template_name': template_name
         })
 
+    def clear(self):
+        self.templates = []
+
 
 registry = TemplateRegistry()
 
