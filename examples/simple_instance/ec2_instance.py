@@ -9,6 +9,8 @@ from troposphere import Ref
 @register('ec2')
 class EC2Template(BaseTemplate, EnvironmentMixin):
 
+    description = 'EC2 with variable instance type depending on environment'
+
     instance = Instance(
         'Ec2Instance',
         ImageId=FindInMap('RegionMap', Ref('AWS::Region'), 'AMI'),

@@ -1,9 +1,9 @@
 import os
-import  json
+import json
 import shutil
 import unittest
 import yaml
-from mock import patch, Mock
+from mock import patch
 from cloudarmy.cli import CloudArmy
 from cloudarmy.core import registry
 from cloudarmy.core.base import BaseTemplate
@@ -67,7 +67,7 @@ class CommandLineTestCase(unittest.TestCase):
             issubclass(registry.templates[0]['template'], BaseTemplate)
         )
 
-    def test_s3_directory(self):
+    def test_s3_root_dir(self):
         ca = CloudArmy(
             template_dir=self.example_project_dir,
             environment_type='staging'
@@ -75,6 +75,16 @@ class CommandLineTestCase(unittest.TestCase):
         self.assertEqual(
             ca.s3_root_dir,
             'https://mys3bucket.s3.amazonaws.com/templates'
+        )
+
+    def test_s3_directory(self):
+        ca = CloudArmy(
+            template_dir=self.example_project_dir,
+            environment_type='staging'
+        )
+        self.assertEqual(
+            ca.s3_directory,
+            'templates'
         )
 
     def test_s3_bucket_name(self):
