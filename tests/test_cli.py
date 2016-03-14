@@ -13,6 +13,7 @@ class CommandLineTestCase(unittest.TestCase):
         self.tmp_template_dir = '/tmp/cloudarmy_tests/'
         os.environ['AWS_ACCESS_KEY_ID'] = 'myid'
         os.environ['AWS_SECRET_ACCESS_KEY'] = 'supersecret'
+        os.environ['AWS_DEFAULT_REGION'] = 'us-west-2'
         try:
             os.mkdir(self.tmp_template_dir)
         except OSError:
