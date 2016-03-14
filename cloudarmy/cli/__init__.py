@@ -2,9 +2,14 @@ import boto3
 import os
 import sys
 import yaml
-from urlparse import urlparse
-
 from cloudarmy.core import registry
+
+try:
+    # Python 3
+    from urllib.parse import urlparse
+except ImportError:
+    # Python 2
+    from urlparse import urlparse
 
 
 class CloudArmy(object):
