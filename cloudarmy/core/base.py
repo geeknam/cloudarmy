@@ -40,7 +40,7 @@ class BaseTemplate(object):
     def add_mappings(self):
         for key, mapping in self.mappings.items():
             self._template.add_mapping(
-                key, self.mappings[key]
+                key, mapping
             )
 
     def add_outputs(self):
