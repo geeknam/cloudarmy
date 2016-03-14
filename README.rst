@@ -6,7 +6,7 @@ cloudarmy
    :target: https://landscape.io/github/geeknam/cloudarmy/master
    :alt: Code Health
 .. image:: https://coveralls.io/repos/geeknam/cloudarmy/badge.svg?branch=master
-   :target: https://coveralls.io/geeknam/cloudarmy
+   :target: https://coveralls.io/github/geeknam/cloudarmy
 
 
 
