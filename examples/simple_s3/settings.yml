@@ -1,5 +1,5 @@
 
-OutputDir: /tmp/cf_templates
+OutputDir: /tmp/cloudarmy_tests/
 
 staging:
   StackName: cloudarmys3

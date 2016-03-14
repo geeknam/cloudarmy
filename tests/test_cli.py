@@ -83,3 +83,14 @@ class CommandLineTestCase(unittest.TestCase):
         self.assertEqual(
             ca.s3_bucket_name, 'mys3bucket'
         )
+
+    def test_render(self):
+        ca = CloudArmy(
+            template_dir=self.example_project_dir,
+            environment_type='staging'
+        )
+        ca.render()
+        self.assertTrue(os.path.exists(
+            '%sec2.json' % ca.output_dir)
+        )
+
