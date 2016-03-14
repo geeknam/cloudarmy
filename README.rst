@@ -5,6 +5,7 @@ cloudarmy
 .. image:: https://landscape.io/github/geeknam/cloudarmy/master/landscape.svg?style=flat
    :target: https://landscape.io/github/geeknam/cloudarmy/master
    :alt: Code Health
+.. image:: https://coveralls.io/repos/github/geeknam/cloudarmy/badge.svg?branch=master :target: https://coveralls.io/github/geeknam/cloudarmy?branch=master
 
 A better workflow for developing and deploying `AWS Cloudformation <https://aws.amazon.com/cloudformation/>`_ templates. Compose Cloudformation templates with Python classes and manage configurations with yaml files.
 
