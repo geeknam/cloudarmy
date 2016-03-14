@@ -24,7 +24,7 @@ class CloudArmy(object):
         self.templates = self.load_templates()
 
     def load_yaml(self, yaml_file):
-        print 'Loading %s...' % yaml_file
+        print('Loading %s...' % yaml_file)
         yaml_mappings = open(
             os.path.join(self.template_dir, yaml_file), 'rb'
         ).read()
@@ -34,7 +34,7 @@ class CloudArmy(object):
         try:
             return self.load_yaml('mappings.yml')
         except IOError:
-            print 'No mappings.yml file found'
+            print('No mappings.yml file found')
             return
 
     def load_settings(self):
@@ -80,7 +80,7 @@ class CloudArmy(object):
             template_file = open(output_file, 'wb')
             template_file.write(rendered_template)
             template_file.close()
-            print 'Saved template to: %s' % output_file
+            print('Saved template to: %s' % output_file)
 
     def upload_templates_to_s3(self):
         for template in self.templates:
@@ -91,7 +91,7 @@ class CloudArmy(object):
                 s3_directory=self.s3_directory,
                 template_name=template['template_name']
             )
-            print 'Uploading to S3: %s ...' % s3_path
+            print('Uploading to S3: %s ...' % s3_path)
             self.s3.meta.client.upload_file(
                 output_file, self.s3_bucket_name, s3_path
             )
@@ -111,7 +111,7 @@ class CloudArmy(object):
         else:
             self.upload_templates_to_s3()
 
-        print 'Creating stack: %s' % stack_settings['StackName']
+        print('Creating stack: %s' % stack_settings['StackName'])
         response = self.cf.create_stack(
             **stack_settings
         )
