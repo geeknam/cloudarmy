@@ -1,5 +1,5 @@
 import click
-from cloudarmy.cli import CloudArmy
+from cloudarmy.cli import CloudArmy, BaseProject
 import pprint
 import webbrowser
 
@@ -7,6 +7,13 @@ import webbrowser
 @click.group()
 def main():
     pass
+
+
+@main.command()
+@click.argument('project_dir')
+def startproject(**kwargs):
+    project = BaseProject(**kwargs)
+    project.create()
 
 
 @main.command()

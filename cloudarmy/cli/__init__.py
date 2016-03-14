@@ -12,6 +12,27 @@ except ImportError:
     from urlparse import urlparse
 
 
+class BaseProject(object):
+
+    base_files = (
+        '__init__.py',
+        'mappings.yml',
+        'settings.yml'
+    )
+
+    def __init__(self, project_dir):
+        self.project_dir = project_dir
+
+    def create(self):
+        for filename in self.base_files:
+            file = open(
+                os.path.join(self.project_dir, filename),
+                'wb'
+            )
+            file.write('')
+        return self.project_dir
+
+
 class CloudArmy(object):
 
     def __init__(self, template_dir, environment_type, **kwargs):

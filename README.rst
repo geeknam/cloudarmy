@@ -32,7 +32,7 @@ Getting Started
 
 .. code-block:: bash
 
-    $ mkdir mystack
+    $ cloudarmy startproject /path/to/mystack
 
 **Project structure**
 
@@ -41,22 +41,10 @@ Getting Started
 
     mystack
     ├── __init__.py
-    ├── ec2_instance.py
     ├── mappings.yml
     └── settings.yml
 
-**Render templates**
-
-.. code-block:: bash
-
-    $ cloudarmy render /path/to/mystack/ staging
-
-*/path/to/mystack/* is your project directory.
-*staging* is the environment you have defined in `settings.yml`.
-
-cloudarmy is opinionated and requires you to define different environments in your settings
-
-**Settings file**
+**Update settings.yml file**
 
 .. code-block:: yaml
 
@@ -83,6 +71,8 @@ cloudarmy is opinionated and requires you to define different environments in yo
 **Template class**
 
 .. code-block:: python
+
+    # mystack/ec2_instance.py
 
     from cloudarmy.core.base import BaseTemplate
     from cloudarmy.contrib.mixins.environment import EnvironmentMixin
@@ -132,6 +122,17 @@ cloudarmy is opinionated and requires you to define different environments in yo
                 }
             })
             return parameters
+
+**Render templates**
+
+.. code-block:: bash
+
+    $ cloudarmy render /path/to/mystack/ staging
+
+*/path/to/mystack/* is your project directory.
+*staging* is the environment you have defined in `settings.yml`.
+
+cloudarmy is opinionated and requires you to define different environments in your settings
 
 
 
